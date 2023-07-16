@@ -1,16 +1,22 @@
 <div class="my-5 container d-flex flex-column">
-    <div *ngFor="let attribute of attributes">
-    <div class="">
-        <ng-container *ngIf="attribute != 'image'; else esImagen">
-            <h5 class="m-0">{{attribute}}: </h5>
-            <p class="">{{character[attribute]}}</p>
+    <div *ngFor="let attribute of getKeys(character)">
+        <ng-container *ngIf="character[attribute] == '[object Object]'; else noEsObjeto">
+            <h5 class="my-0">{{attribute}}:</h5>
+            <div class="ms-3">
+                <div class="mb-3" *ngFor="let key of getKeys(character[attribute])">
+                    <p class="my-0 "><strong>{{key}}:</strong> {{character[attribute][key]}}</p>
+                </div>
+            </div>
         </ng-container>
-    </div>
-    <div class="">
-        <ng-template #esImagen>
-        <img class="w-25" [src]="character[attribute]" alt="Rick and Morty character {{character.name}}">
+        <ng-template #noEsObjeto>
+            <ng-container *ngIf="attribute !== 'image'; else esImagen">
+                <h5 class="m-0">{{attribute}}:</h5>
+                <p>{{character[attribute]}}</p>
+            </ng-container>
+
+            <ng-template #esImagen>
+                <img class="w-25" [src]="character[attribute]" alt="Rick and Morty character {{character.name}}" />
+            </ng-template>
         </ng-template>
     </div>
-    </div>
 </div>
-

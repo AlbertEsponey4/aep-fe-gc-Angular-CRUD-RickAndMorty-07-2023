@@ -31,7 +31,7 @@ import { OneCharacterComponent } from './one-character/one-character.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

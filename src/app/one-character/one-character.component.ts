@@ -12,6 +12,6 @@ export class OneCharacterComponent {
   constructor(private router: Router) {}
 
   seeMore(character: any) {
-    this.router.navigate(['/start-page/detail'], { state: { character } });
+    this.router.navigate(['/start-page/detail'], {state: {character}});
   }
 }

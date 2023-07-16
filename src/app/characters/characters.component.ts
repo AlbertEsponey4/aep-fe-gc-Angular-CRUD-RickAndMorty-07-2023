@@ -12,6 +12,6 @@ export class CharactersComponent {
   constructor(private charactersService: CharactersService) {}
 
   ngOnInit() {
-    this.characters = this.charactersService.retornar();
+    this.charactersService.getCharacters().subscribe((result: any) => this.characters = result.results); //hay que poner result.results porque este endpoint devuelve más informacion que los personajes, pero los personajes están en result.
   }
 }

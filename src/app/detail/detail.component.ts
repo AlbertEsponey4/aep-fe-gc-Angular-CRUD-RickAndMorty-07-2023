@@ -9,5 +9,7 @@ export class DetailComponent {
   character: any = history.state.character;
   attributes: string[] = Object.keys(this.character);
 
-
+  getKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
 }

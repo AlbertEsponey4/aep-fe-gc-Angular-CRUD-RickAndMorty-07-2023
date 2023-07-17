@@ -8,11 +8,13 @@ export class CharactersService {
 
   constructor(private http: HttpClient) { }
 
+  // obtiene todos los personajes
   getCharacters(){
     return this.http.get("https://rickandmortyapi.com/api/character");
   }
 
-  getSingleCharacter(id: number){
+  // obtiene un personaje
+  getCharacter(id: number){
     return this.http.get("https://rickandmortyapi.com/api/character/"+id);
   }
 }

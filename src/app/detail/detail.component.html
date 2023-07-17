@@ -1,21 +1,31 @@
+<!-- Voy a suponer que no se los atributos que tiene cada personaje, y que pueden ser diferentes para cada caso -->
+
 <div class="my-5 container d-flex flex-column">
-    <div *ngFor="let attribute of getKeys(character)">
-        <ng-container *ngIf="character[attribute] == '[object Object]'; else noEsObjeto">
-            <h5 class="my-0">{{attribute}}:</h5>
-            <div class="ms-3">
-                <div class="mb-3" *ngFor="let key of getKeys(character[attribute])">
-                    <p class="my-0 "><strong>{{key}}:</strong> {{character[attribute][key]}}</p>
+    <!-- Para cada atributo de los todos las keys (atibutos) que tiene el objeto personaje, creo la siguiente estructura: -->
+    <div *ngFor="let key of getKeys(character)">
+        <!-- si el atributo devuelve [object Object], es que el tributo es un objeto, por lo tanto vuelvo a hacer un recorrido de los atributos del atributo-->
+        <ng-container *ngIf="character[key] == '[object Object]'; else noEsObjeto">
+            <!-- El atributo en question: -->
+            <h5 class="my-0">{{key}}:</h5>
+            <div class="ms-3"> 
+                <!-- Vuelvo a recorrer los atributos del atributo -->
+                <!-- Importante tener en cuenta que los atributos se muestran así: character[key] y NO así: character.key porque key es un numero, no el valor del atributo-->
+                <div class="mb-3" *ngFor="let keyHija of getKeys(character[key])">
+                    <!-- Los muestro de la siguiente manera -->
+                    <p class="my-0 "><strong>{{keyHija}}:</strong> {{character[key][keyHija]}}</p>
                 </div>
             </div>
         </ng-container>
+        <!-- Por otro lado, si no es un objeto y por lo tanto ya es un atributo corriente, simplemento lo muestro -->
         <ng-template #noEsObjeto>
-            <ng-container *ngIf="attribute !== 'image'; else esImagen">
-                <h5 class="m-0">{{attribute}}:</h5>
-                <p>{{character[attribute]}}</p>
-            </ng-container>
 
+            <ng-container *ngIf="key !== 'image'; else esImagen">
+                <h5 class="m-0">{{key}}:</h5>
+                <p>{{character[key]}}</p>
+            </ng-container>
+            <!-- Si es imagen mustro la imagen así, porque el atributo es la URL -->
             <ng-template #esImagen>
-                <img class="w-25" [src]="character[attribute]" alt="Rick and Morty character {{character.name}}" />
+                <img class="w-25" [src]="character[key]" alt="Rick and Morty character {{character.name}}" />
             </ng-template>
         </ng-template>
     </div>

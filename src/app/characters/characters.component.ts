@@ -11,7 +11,8 @@ export class CharactersComponent {
 
   constructor(private charactersService: CharactersService) {}
 
+  // Si no tipo el result a any, no funciona
   ngOnInit() {
-    this.charactersService.getCharacters().subscribe((result: any) => this.characters = result.results); //hay que poner result.results porque este endpoint devuelve más informacion que los personajes, pero los personajes están en result.
+    this.charactersService.getCharacters().subscribe((result: any) => this.characters = result.results); //hay que poner result.results porque este endpoint devuelve más objetos que los personajes, pero los personajes están en el objeto result.
   }
 }
